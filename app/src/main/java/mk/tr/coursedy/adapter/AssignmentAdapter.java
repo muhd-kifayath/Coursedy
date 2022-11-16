@@ -77,7 +77,6 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.Vi
                         myAnswer=answerInput.getText().toString();
                         DatabaseReference uploadRef = FirebaseDatabase.getInstance().getReference("UploadAssignments");
                         Map<String, Object> hashMap = new HashMap<>();
-
                         hashMap.put("courseId", assignment.getCourseId());
                         hashMap.put("assignmentId", assignment.getAssignmentId());
                         hashMap.put("assignmentInfoText", assignment.getAssignmentInfoText());

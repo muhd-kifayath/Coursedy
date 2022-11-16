@@ -58,7 +58,7 @@ public class MessagesActivity extends AppCompatActivity {
 
     private void allUsersRead()
     {
-        DatabaseReference userRef = FirebaseDatabase.getInstance("https://coursedy-b1-default-rtdb.asia-southeast1.firebasedatabase.app//").getReference("Users");
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users");
 
         //isim sırasına göre listelensin.
         userRef.orderByChild("nameSurname").addValueEventListener(new ValueEventListener() {

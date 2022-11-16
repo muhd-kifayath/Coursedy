@@ -74,7 +74,7 @@ public class PostActivity extends AppCompatActivity {
 
     private void readPosts() {
 
-        DatabaseReference refAssignment = FirebaseDatabase.getInstance("https://coursedy-b1-default-rtdb.asia-southeast1.firebasedatabase.app//")
+        DatabaseReference refAssignment = FirebaseDatabase.getInstance()
                 .getReference("Posts").child(courseId);
         refAssignment.addValueEventListener(new ValueEventListener() {
             @Override

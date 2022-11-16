@@ -117,26 +117,27 @@ public class ChatActivity extends AppCompatActivity {
         timeFormat.setTimeZone(TimeZone.getTimeZone("GMT+03"));
         String currentTime = timeFormat.format(time.getTime());
 
-        DatabaseReference referenceChat = FirebaseDatabase.getInstance("https://coursedy-b1-default-rtdb.asia-southeast1.firebasedatabase.app//").getReference("Messages");
+        DatabaseReference referenceChat = FirebaseDatabase.getInstance().getReference("Messages");
         String chatId = referenceChat.push().getKey();
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("messageText",enterTextChat.getText().toString());
-        hashMap.put("receiverUserId",userId);
-        hashMap.put("senderUserId",currentUser.getUid());
-        hashMap.put("currentDate",currentDate);
-        hashMap.put("currentTime",currentTime);
+        Chat chat = new Chat();
+        chat.setMessageText(enterTextChat.getText().toString());
+        chat.setReceiverUserId(userId);
+        chat.setSenderUserId(currentUser.getUid());
+        chat.setCurrentDate(currentDate);
+        chat.setCurrentTime(currentTime);
+
         /*hashMap.put("receiverUserName",userName);
         hashMap.put("receiverUserPictureUrl",userPictureUrl);
         hashMap.put("senderUserName",userPictureUrl);
         hashMap.put("senderUserPictureUrl",userPictureUrl);*/
 
         assert chatId != null;
-        referenceChat.child(chatId).setValue(hashMap);
+        referenceChat.child(chatId).setValue(chat);
         //referenceChat.updateChildren(hashMap);
         enterTextChat.setText("");
     }
     private void getImage(){
-        DatabaseReference reference = FirebaseDatabase.getInstance("https://coursedy-b1-default-rtdb.asia-southeast1.firebasedatabase.app//").getReference("Users").child(currentUser.getUid());
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -154,7 +155,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private void readMessages(){
 
-        DatabaseReference reference = FirebaseDatabase.getInstance("https://coursedy-b1-default-rtdb.asia-southeast1.firebasedatabase.app//").getReference("Messages");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Messages");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

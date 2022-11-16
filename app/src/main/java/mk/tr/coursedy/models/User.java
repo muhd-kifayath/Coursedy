@@ -34,4 +34,24 @@ public class User {
     public String getType() {
         return type;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setNameSurname(String nameSurname) {
+        this.nameSurname = nameSurname;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

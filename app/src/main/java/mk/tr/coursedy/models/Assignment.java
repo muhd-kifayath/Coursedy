@@ -33,4 +33,24 @@ public class Assignment {
     public String getCourseName() {
         return courseName;
     }
+
+    public void setAssignmentId(String assignmentId) {
+        this.assignmentId = assignmentId;
+    }
+
+    public void setAssignmentInfoText(String assignmentInfoText) {
+        this.assignmentInfoText = assignmentInfoText;
+    }
+
+    public void setAssignmentDate(String assignmentDate) {
+        this.assignmentDate = assignmentDate;
+    }
+
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
 }

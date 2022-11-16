@@ -20,4 +20,11 @@ public class Comment {
         return userId;
     }
 
+    public void setCommentText(String commentText) {
+        this.commentText = commentText;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 }

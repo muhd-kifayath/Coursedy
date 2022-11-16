@@ -44,4 +44,28 @@ public class Post {
     public String getDateTime() {
         return dateTime;
     }
+
+    public void setPostId(String postId) {
+        this.postId = postId;
+    }
+
+    public void setPostType(String postType) {
+        this.postType = postType;
+    }
+
+    public void setPostText(String postText) {
+        this.postText = postText;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setPostUserName(String postUserName) {
+        this.postUserName = postUserName;
+    }
+
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
+    }
 }

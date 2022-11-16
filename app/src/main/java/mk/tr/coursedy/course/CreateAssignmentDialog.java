@@ -75,10 +75,10 @@ public class CreateAssignmentDialog extends AppCompatDialogFragment {
 
     private void createAssignment(final String courseId, final String courseName)
     {
-        final DatabaseReference postRef = FirebaseDatabase.getInstance("https://coursedy-b1-default-rtdb.asia-southeast1.firebasedatabase.app//").getReference("Posts");
-        assignmentRef = FirebaseDatabase.getInstance("https://coursedy-b1-default-rtdb.asia-southeast1.firebasedatabase.app//").getReference("Assignments");
+        final DatabaseReference postRef = FirebaseDatabase.getInstance().getReference("Posts");
+        assignmentRef = FirebaseDatabase.getInstance().getReference("Assignments");
         final String assignmentId = assignmentRef.push().getKey();
-        DatabaseReference studentRef = FirebaseDatabase.getInstance("https://coursedy-b1-default-rtdb.asia-southeast1.firebasedatabase.app//").getReference("StudentListOfTheCourses")
+        DatabaseReference studentRef = FirebaseDatabase.getInstance().getReference("StudentListOfTheCourses")
                 .child(courseId);
         studentRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -131,7 +131,7 @@ public class CreateAssignmentDialog extends AppCompatDialogFragment {
 
 
     private void addAnnouncement(final String assignmentId){ // Assignment oluşturulduğunda çağıracağız bu methodu.
-        DatabaseReference studentRef = FirebaseDatabase.getInstance("https://coursedy-b1-default-rtdb.asia-southeast1.firebasedatabase.app//").getReference("StudentListOfTheCourses")
+        DatabaseReference studentRef = FirebaseDatabase.getInstance().getReference("StudentListOfTheCourses")
                 .child(courseCallId);
 
         studentRef.addValueEventListener(new ValueEventListener() {
@@ -141,7 +141,7 @@ public class CreateAssignmentDialog extends AppCompatDialogFragment {
                 {
                     StudentListOfTheCourses st = snapshot.getValue(StudentListOfTheCourses.class);
                     assert st != null;
-                    DatabaseReference referenceAnnouncement = FirebaseDatabase.getInstance("https://coursedy-b1-default-rtdb.asia-southeast1.firebasedatabase.app//").getReference("Announcements")
+                    DatabaseReference referenceAnnouncement = FirebaseDatabase.getInstance().getReference("Announcements")
                             .child(st.getStudentId());
 
                     HashMap<String, Object> hashMap = new HashMap<>();

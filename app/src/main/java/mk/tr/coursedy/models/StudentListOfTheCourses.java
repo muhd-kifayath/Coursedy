@@ -35,4 +35,24 @@ public class StudentListOfTheCourses
     public String getStudentPicture() {
         return studentPicture;
     }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+
+    public void setStudentEmail(String studentEmail) {
+        this.studentEmail = studentEmail;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+    public void setStudentPicture(String studentPicture) {
+        this.studentPicture = studentPicture;
+    }
+
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
+    }
 }

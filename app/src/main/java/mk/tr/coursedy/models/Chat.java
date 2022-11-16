@@ -35,5 +35,23 @@ public class Chat {
         return receiverUserId;
     }
 
+    public void setMessageText(String messageText) {
+        this.messageText = messageText;
+    }
 
+    public void setReceiverUserId(String receiverUserId) {
+        this.receiverUserId = receiverUserId;
+    }
+
+    public void setSenderUserId(String senderUserId) {
+        this.senderUserId = senderUserId;
+    }
+
+    public void setCurrentDate(String currentDate) {
+        this.currentDate = currentDate;
+    }
+
+    public void setCurrentTime(String currentTime) {
+        this.currentTime = currentTime;
+    }
 }

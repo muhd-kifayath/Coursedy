@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.nav_courses);
         //Switch to other pages
 
+        add = findViewById(R.id.add_course);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_courses);
         recyclerView.setHasFixedSize(true);
@@ -99,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void addbtn()
     {
-        DatabaseReference reference = FirebaseDatabase.getInstance("https://coursedy-b1-default-rtdb.asia-southeast1.firebasedatabase.app//").getReference("Users").child(currentUser.getUid());
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -135,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void readCourses() {
 
-        DatabaseReference courseRef = FirebaseDatabase.getInstance("https://coursedy-b1-default-rtdb.asia-southeast1.firebasedatabase.app//").getReference("Courses");
+        DatabaseReference courseRef = FirebaseDatabase.getInstance().getReference("Courses");
         courseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -144,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                     final Course course =snapshot.getValue(Course.class);
                     if(course!=null)
                     {
-                        final DatabaseReference studentRef = FirebaseDatabase.getInstance("https://coursedy-b1-default-rtdb.asia-southeast1.firebasedatabase.app//")
+                        final DatabaseReference studentRef = FirebaseDatabase.getInstance()
                                 .getReference("StudentListOfTheCourses").child(course.getCourseId());
                         studentRef.addValueEventListener(new ValueEventListener() {
                             @Override
@@ -169,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                 }
-                courseAdapter.notifyDataSetChanged(); ////anında değişiklikleri yansıtsın diye.
+                courseAdapter.notifyDataSetChanged();
 
             }
 
@@ -198,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
     private void readCourseCodeFromDb(final String codeInput)
     {
 
-        final DatabaseReference reference = FirebaseDatabase.getInstance("https://coursedy-b1-default-rtdb.asia-southeast1.firebasedatabase.app//").getReference("Courses");
+        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Courses");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
@@ -212,10 +213,10 @@ public class MainActivity extends AppCompatActivity {
                     if(course.getCourseCode().equals(codeInput))
                     {
                         countIfCourseCode++;
-                        studentListRef = FirebaseDatabase.getInstance("https://coursedy-b1-default-rtdb.asia-southeast1.firebasedatabase.app//").getReference("StudentListOfTheCourses")
+                        studentListRef = FirebaseDatabase.getInstance().getReference("StudentListOfTheCourses")
                                 .child(course.getCourseId());
 
-                        DatabaseReference userRef = FirebaseDatabase.getInstance("https://coursedy-b1-default-rtdb.asia-southeast1.firebasedatabase.app//").getReference("Users")
+                        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users")
                                 .child(currentUser.getUid());
 
                         userRef.addValueEventListener(new ValueEventListener() {

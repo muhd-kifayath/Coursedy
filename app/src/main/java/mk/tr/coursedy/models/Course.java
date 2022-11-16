@@ -50,4 +50,36 @@ public class Course {
     public String getCourseTeacherId() {
         return courseTeacherId;
     }
+
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public void setCoursePeriod(String coursePeriod) {
+        this.coursePeriod = coursePeriod;
+    }
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+    public void setCourseTeacherName(String courseTeacherName) {
+        this.courseTeacherName = courseTeacherName;
+    }
+
+    public void setCourseTeacherId(String courseTeacherId) {
+        this.courseTeacherId = courseTeacherId;
+    }
+
+    public void setCourseStudentsId(String courseStudentsId) {
+        this.courseStudentsId = courseStudentsId;
+    }
 }

@@ -73,7 +73,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     }
 
     private void getUserInfos(final ImageView profileImg, final TextView nameSurname, String userId){
-        DatabaseReference reference = FirebaseDatabase.getInstance("https://coursedy-b1-default-rtdb.asia-southeast1.firebasedatabase.app//").getReference().child("Users").child(userId);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

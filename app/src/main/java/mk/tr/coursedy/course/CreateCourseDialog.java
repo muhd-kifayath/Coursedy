@@ -56,7 +56,7 @@ public class CreateCourseDialog extends AppCompatDialogFragment {
                 });
 
         currentUser= FirebaseAuth.getInstance().getCurrentUser();
-        courseReference = FirebaseDatabase.getInstance("https://coursedy-b1-default-rtdb.asia-southeast1.firebasedatabase.app//").getReference("Courses");
+        courseReference = FirebaseDatabase.getInstance().getReference("Courses");
         courseName = view.findViewById(R.id.dialog_edit_courseName);
         coursePeriod = view.findViewById(R.id.dialog_edit_coursePeriod);
         courseCode = view.findViewById(R.id.dialog_edit_courseCode);
@@ -71,7 +71,7 @@ public class CreateCourseDialog extends AppCompatDialogFragment {
 
 
         //final String[] tempTeacherName = new String[1];
-        DatabaseReference referenceUser = FirebaseDatabase.getInstance("https://coursedy-b1-default-rtdb.asia-southeast1.firebasedatabase.app//").getReference("Users").child(currentUser.getUid());
+        DatabaseReference referenceUser = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid());
         referenceUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

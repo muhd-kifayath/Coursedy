@@ -65,7 +65,7 @@ public class AssignmentsActivity extends AppCompatActivity {
         switchPage();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         createAssignment = findViewById(R.id.txt_createAssignment);
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://coursedy-b1-default-rtdb.asia-southeast1.firebasedatabase.app//");
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference= database.getReference("Users");
         databaseReference.child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -117,7 +117,7 @@ public class AssignmentsActivity extends AppCompatActivity {
     //for Students
     private void readAssignments()
     {
-        DatabaseReference refAssignment = FirebaseDatabase.getInstance("https://coursedy-b1-default-rtdb.asia-southeast1.firebasedatabase.app//")
+        DatabaseReference refAssignment = FirebaseDatabase.getInstance()
                 .getReference("Assignments").child(currentUser.getUid());
         refAssignment.addValueEventListener(new ValueEventListener() {
             @Override

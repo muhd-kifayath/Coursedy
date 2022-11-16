@@ -75,7 +75,7 @@ public class AnnouncementsActivity extends AppCompatActivity {
     {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         assert currentUser != null;
-        DatabaseReference reference = FirebaseDatabase.getInstance("https://coursedy-b1-default-rtdb.asia-southeast1.firebasedatabase.app//").getReference("Announcements").child(currentUser.getUid());
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Announcements").child(currentUser.getUid());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

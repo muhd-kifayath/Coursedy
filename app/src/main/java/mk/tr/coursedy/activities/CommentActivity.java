@@ -99,15 +99,16 @@ public class CommentActivity extends AppCompatActivity {
 
     private void addCommentMethod(){
 
-        DatabaseReference referenceCom = FirebaseDatabase.getInstance("https://coursedy-b1-default-rtdb.asia-southeast1.firebasedatabase.app//").getReference("Comments").child(postId);
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("commentText",addComment.getText().toString());
-        hashMap.put("userId",currentUser.getUid());
-        referenceCom.push().setValue(hashMap);
+        DatabaseReference referenceCom = FirebaseDatabase.getInstance().getReference("Comments").child(postId);
+        Comment comment = new Comment();
+        comment.setCommentText(addComment.getText().toString());
+        comment.setUserId(currentUser.getUid());
+
+        referenceCom.push().setValue(comment);
         addComment.setText("");
     }
     private void getImage(){
-        DatabaseReference reference = FirebaseDatabase.getInstance("https://coursedy-b1-default-rtdb.asia-southeast1.firebasedatabase.app//").getReference("Users").child(currentUser.getUid());
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -125,7 +126,7 @@ public class CommentActivity extends AppCompatActivity {
 
     private void readComments(){
 
-        DatabaseReference reference = FirebaseDatabase.getInstance("https://coursedy-b1-default-rtdb.asia-southeast1.firebasedatabase.app//").getReference("Comments").child(postId);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Comments").child(postId);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
