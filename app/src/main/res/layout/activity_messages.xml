@@ -66,6 +66,15 @@
 
     </RelativeLayout>
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/navbar_course"
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        app:layout_anchor="@id/bottomAppBar"
+        android:layout_gravity="top"
+        android:background="@color/white_50"
+        />
+
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"

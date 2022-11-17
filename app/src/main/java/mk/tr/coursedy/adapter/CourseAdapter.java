@@ -86,7 +86,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 User user = dataSnapshot.getValue(User.class);
-                if(user.getType().equals("Teacher")){
+                if(user.getType().equals("Faculty")){
                     holder.createAssignment.setVisibility(View.VISIBLE);
                     holder.editCourse.setVisibility(View.VISIBLE);
                 }

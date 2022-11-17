@@ -1,7 +1,6 @@
 package mk.tr.coursedy.activities;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -9,16 +8,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,10 +32,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import mk.tr.coursedy.R;
 import mk.tr.coursedy.adapter.CourseAdapter;
-import mk.tr.coursedy.course.CreateCourseDialog;
 import mk.tr.coursedy.models.Course;
 import mk.tr.coursedy.models.User;
 
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onClick(View v) {
                             if (user.getType().equals("Student")) {
                                 openJoinCourseDialog();
-                            } else if (user.getType().equals("Teacher")) {
+                            } else if (user.getType().equals("Faculty")) {
                                 openCourseDialog();
                             }
                         }
@@ -131,8 +131,78 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openCourseDialog() {
-        CreateCourseDialog createCourseDialog = new CreateCourseDialog();
-        createCourseDialog.show(getSupportFragmentManager(),"Create Course");
+        EditText courseName;
+        EditText coursePeriod;
+        EditText courseCode;
+        ImageView close;
+        Button add_course;
+        FirebaseUser currentUser;
+        DatabaseReference courseReference;
+        String teacherName;
+
+        Dialog create = new Dialog(MainActivity.this);
+        create.setContentView(R.layout.create_dialog);
+
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        courseReference = FirebaseDatabase.getInstance().getReference("Courses");
+        courseName = create.findViewById(R.id.dialog_edit_courseName);
+        coursePeriod = create.findViewById(R.id.dialog_edit_coursePeriod);
+        courseCode = create.findViewById(R.id.dialog_edit_courseCode);
+        add_course = create.findViewById(R.id.add_course);
+        close = create.findViewById(R.id.close);
+
+        add_course.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String courseId = courseReference.push().getKey();
+
+                //final String[] tempTeacherName = new String[1];
+                DatabaseReference referenceUser = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid());
+                referenceUser.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        User user = dataSnapshot.getValue(User.class);
+
+                        assert user != null;
+                        String teacherName = user.getNameSurname();
+                        Map<String, Object> hashMap = new HashMap<>();
+
+                        hashMap.put("courseId", courseId);
+                        hashMap.put("courseName", courseName.getText().toString());
+                        hashMap.put("coursePeriod", coursePeriod.getText().toString());
+                        hashMap.put("courseCode", courseCode.getText().toString());
+                        hashMap.put("courseTeacherId", currentUser.getUid());
+                        hashMap.put("courseTeacherName", teacherName);
+                        hashMap.put("courseStudentsId", "");
+                        assert courseId != null;
+                        courseReference.child(courseId).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                create.dismiss();
+                            }
+                        });
+
+
+                        //    startActivity(new Intent(getActivity(), ProfileActivity.class));
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
+
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                create.dismiss();
+            }
+        });
+
+        create.show();
     }
 
     private void readCourses() {
@@ -185,20 +255,29 @@ public class MainActivity extends AppCompatActivity {
 
     private void openJoinCourseDialog() {
         Dialog dialog = new Dialog(MainActivity.this);
-        dialog.setTitle("Enter Course Code");
-        final EditText codeInput = new EditText(MainActivity.this);
-        codeInput.setInputType(InputType.TYPE_CLASS_TEXT);
         dialog.setContentView(R.layout.join_dialog);
-        dialog.setPositiveButton("OK", (dialog1, which) -> {
+        final EditText courseCode = dialog.findViewById(R.id.dialog_edit_courseCode);
+        Button join = dialog.findViewById(R.id.join_course);
+        ImageView close = dialog.findViewById(R.id.close);
 
-            codeText = codeInput.getText().toString();
-            readCourseCodeFromDb(codeText);
+        join.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                codeText = courseCode.getText().toString();
+                readCourseCodeFromDb(codeText);
+                dialog.dismiss();
+            }
         });
-        dialog.setNegativeButton("Cancel", (dialogInterface, which) -> dialogInterface.dismiss());
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
         dialog.show();
     }
-    private void readCourseCodeFromDb(final String codeInput)
-    {
+
+    private void readCourseCodeFromDb(final String codeInput) {
 
         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Courses");
         reference.addValueEventListener(new ValueEventListener() {

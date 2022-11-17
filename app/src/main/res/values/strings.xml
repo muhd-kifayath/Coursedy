@@ -51,4 +51,6 @@
     <string name="answer">Answer</string>
     <string name="upload">Upload</string>
     <string name="join_course_text">Join Course</string>
+    <string name="join">Join</string>
+    <string name="add_course_text">Add Course</string>
 </resources>

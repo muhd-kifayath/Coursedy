@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -50,13 +51,6 @@ public class AssignmentsActivity extends AppCompatActivity {
             getSupportActionBar().hide();
         setContentView(R.layout.activity_assignments);
 
-        //Important open user page
-       /* Bundle b = getIntent().getExtras();
-        assert b != null;
-        courseId = b.getString("courseId");*/
-
-
-        ////Important open user page
 
         bottomNavigationView = findViewById(R.id.main_bottom_nav);
         //Course Activity page select
@@ -139,8 +133,8 @@ public class AssignmentsActivity extends AppCompatActivity {
 
     private void openAssignmentDialog()
     {
-        /*CreateAssignmentDialog createCourseDialog = new CreateAssignmentDialog();
-        createCourseDialog.show(getSupportFragmentManager(),"Create Assignment");*/
+        Dialog crasn = new Dialog(AssignmentsActivity.this);
+
     }
 
     private void switchPage(){
