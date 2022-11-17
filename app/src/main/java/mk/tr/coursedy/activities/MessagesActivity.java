@@ -59,8 +59,6 @@ public class MessagesActivity extends AppCompatActivity {
     private void allUsersRead()
     {
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users");
-
-        //isim sırasına göre listelensin.
         userRef.orderByChild("nameSurname").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

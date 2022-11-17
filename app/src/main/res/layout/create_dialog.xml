@@ -85,6 +85,7 @@
             android:id="@+id/dialog_text_courseCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:text="@string/course_code"
             android:textSize="16sp"/>
 
@@ -102,6 +103,7 @@
             android:minHeight="48dp"
             android:paddingHorizontal="20sp"
             android:paddingVertical="10sp"
+            android:textColor="@color/black"
             android:textColorHint="@color/white_50"
             android:textSize="14sp" />
     </LinearLayout>

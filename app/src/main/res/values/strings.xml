@@ -50,4 +50,5 @@
     <string name="assignment_info">Write information for assignment.</string>
     <string name="answer">Answer</string>
     <string name="upload">Upload</string>
+    <string name="join_course_text">Join Course</string>
 </resources>

@@ -18,5 +18,14 @@
         <item name="background">@color/midnight_500</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="Dialog" parent="Theme.AppCompat.Light">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryDark">@color/midnight_700</item>
+        <item name="colorAccent">@color/blue_700</item>
+        <item name="android:textColor">@color/midnight_700</item>
+        <item name="background">@color/white</item>
+        <!-- Customize your theme here. -->
+    </style>
 
 </resources>

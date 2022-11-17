@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -183,11 +184,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void openJoinCourseDialog() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
-        dialog.setTitle("Find out the class code from your teacher and enter it here.");
+        Dialog dialog = new Dialog(MainActivity.this);
+        dialog.setTitle("Enter Course Code");
         final EditText codeInput = new EditText(MainActivity.this);
         codeInput.setInputType(InputType.TYPE_CLASS_TEXT);
-        dialog.setView(codeInput);
+        dialog.setContentView(R.layout.join_dialog);
         dialog.setPositiveButton("OK", (dialog1, which) -> {
 
             codeText = codeInput.getText().toString();
